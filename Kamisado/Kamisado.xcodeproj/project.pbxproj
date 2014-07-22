@@ -1,0 +1,572 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		502B6B98197DE1960002A22D /* KMChecker.m in Sources */ = {isa = PBXBuildFile; fileRef = 502B6B97197DE1960002A22D /* KMChecker.m */; };
+		502B6B9C197DE1B50002A22D /* KMPlayField.m in Sources */ = {isa = PBXBuildFile; fileRef = 502B6B9B197DE1B50002A22D /* KMPlayField.m */; };
+		502B6BA0197DEAAD0002A22D /* KMPlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 502B6B9F197DEAAD0002A22D /* KMPlayViewController.m */; };
+		509447ED197DD503009047CF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 509447EC197DD503009047CF /* Foundation.framework */; };
+		509447EF197DD503009047CF /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 509447EE197DD503009047CF /* CoreGraphics.framework */; };
+		509447F1197DD503009047CF /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 509447F0197DD503009047CF /* UIKit.framework */; };
+		509447F7197DD503009047CF /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 509447F5197DD503009047CF /* InfoPlist.strings */; };
+		509447F9197DD503009047CF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 509447F8197DD503009047CF /* main.m */; };
+		50944800197DD503009047CF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 509447FE197DD503009047CF /* Main.storyboard */; };
+		50944805197DD503009047CF /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 50944804197DD503009047CF /* Images.xcassets */; };
+		5094480C197DD503009047CF /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5094480B197DD503009047CF /* XCTest.framework */; };
+		5094480D197DD503009047CF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 509447EC197DD503009047CF /* Foundation.framework */; };
+		5094480E197DD503009047CF /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 509447F0197DD503009047CF /* UIKit.framework */; };
+		50944816197DD503009047CF /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 50944814197DD503009047CF /* InfoPlist.strings */; };
+		50944818197DD503009047CF /* KamisadoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 50944817197DD503009047CF /* KamisadoTests.m */; };
+		5094482A197DD6C2009047CF /* checker_mask@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 50944827197DD6C2009047CF /* checker_mask@2x.png */; };
+		5094482B197DD6C2009047CF /* fields.png in Resources */ = {isa = PBXBuildFile; fileRef = 50944828197DD6C2009047CF /* fields.png */; };
+		50C09885197E095100CBE1C2 /* KMAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 50C09884197E095100CBE1C2 /* KMAppDelegate.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		5094480F197DD503009047CF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 509447E1197DD503009047CF /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 509447E8197DD503009047CF;
+			remoteInfo = Kamisado;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		502B6B94197DE04C0002A22D /* Definitions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Definitions.h; sourceTree = "<group>"; };
+		502B6B96197DE1960002A22D /* KMChecker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KMChecker.h; sourceTree = "<group>"; };
+		502B6B97197DE1960002A22D /* KMChecker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KMChecker.m; sourceTree = "<group>"; };
+		502B6B9A197DE1B50002A22D /* KMPlayField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KMPlayField.h; sourceTree = "<group>"; };
+		502B6B9B197DE1B50002A22D /* KMPlayField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KMPlayField.m; sourceTree = "<group>"; };
+		502B6B9E197DEAAD0002A22D /* KMPlayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KMPlayViewController.h; sourceTree = "<group>"; };
+		502B6B9F197DEAAD0002A22D /* KMPlayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KMPlayViewController.m; sourceTree = "<group>"; };
+		509447E9197DD503009047CF /* Kamisado.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kamisado.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		509447EC197DD503009047CF /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		509447EE197DD503009047CF /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		509447F0197DD503009047CF /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		509447F4197DD503009047CF /* Kamisado-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Kamisado-Info.plist"; sourceTree = "<group>"; };
+		509447F6197DD503009047CF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		509447F8197DD503009047CF /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		509447FA197DD503009047CF /* Kamisado-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Kamisado-Prefix.pch"; sourceTree = "<group>"; };
+		509447FF197DD503009047CF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		50944804197DD503009047CF /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		5094480A197DD503009047CF /* KamisadoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KamisadoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		5094480B197DD503009047CF /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		50944813197DD503009047CF /* KamisadoTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "KamisadoTests-Info.plist"; sourceTree = "<group>"; };
+		50944815197DD503009047CF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		50944817197DD503009047CF /* KamisadoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KamisadoTests.m; sourceTree = "<group>"; };
+		50944827197DD6C2009047CF /* checker_mask@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "checker_mask@2x.png"; sourceTree = "<group>"; };
+		50944828197DD6C2009047CF /* fields.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fields.png; sourceTree = "<group>"; };
+		50C09883197E095100CBE1C2 /* KMAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KMAppDelegate.h; sourceTree = "<group>"; };
+		50C09884197E095100CBE1C2 /* KMAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KMAppDelegate.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		509447E6197DD503009047CF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				509447EF197DD503009047CF /* CoreGraphics.framework in Frameworks */,
+				509447F1197DD503009047CF /* UIKit.framework in Frameworks */,
+				509447ED197DD503009047CF /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		50944807197DD503009047CF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5094480C197DD503009047CF /* XCTest.framework in Frameworks */,
+				5094480E197DD503009047CF /* UIKit.framework in Frameworks */,
+				5094480D197DD503009047CF /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		502B6B95197DE1960002A22D /* KMChecker */ = {
+			isa = PBXGroup;
+			children = (
+				502B6B96197DE1960002A22D /* KMChecker.h */,
+				502B6B97197DE1960002A22D /* KMChecker.m */,
+			);
+			path = KMChecker;
+			sourceTree = "<group>";
+		};
+		502B6B99197DE19F0002A22D /* KMPlayField */ = {
+			isa = PBXGroup;
+			children = (
+				502B6B9A197DE1B50002A22D /* KMPlayField.h */,
+				502B6B9B197DE1B50002A22D /* KMPlayField.m */,
+			);
+			path = KMPlayField;
+			sourceTree = "<group>";
+		};
+		502B6B9D197DEAAD0002A22D /* KMPlayViewController */ = {
+			isa = PBXGroup;
+			children = (
+				502B6B9E197DEAAD0002A22D /* KMPlayViewController.h */,
+				502B6B9F197DEAAD0002A22D /* KMPlayViewController.m */,
+			);
+			path = KMPlayViewController;
+			sourceTree = "<group>";
+		};
+		509447E0197DD503009047CF = {
+			isa = PBXGroup;
+			children = (
+				509447F2197DD503009047CF /* Kamisado */,
+				50944811197DD503009047CF /* KamisadoTests */,
+				509447EB197DD503009047CF /* Frameworks */,
+				509447EA197DD503009047CF /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		509447EA197DD503009047CF /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				509447E9197DD503009047CF /* Kamisado.app */,
+				5094480A197DD503009047CF /* KamisadoTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		509447EB197DD503009047CF /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				509447EC197DD503009047CF /* Foundation.framework */,
+				509447EE197DD503009047CF /* CoreGraphics.framework */,
+				509447F0197DD503009047CF /* UIKit.framework */,
+				5094480B197DD503009047CF /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		509447F2197DD503009047CF /* Kamisado */ = {
+			isa = PBXGroup;
+			children = (
+				502B6B94197DE04C0002A22D /* Definitions.h */,
+				50C09882197E095100CBE1C2 /* KMAppDelegate */,
+				50944821197DD6C2009047CF /* Classes */,
+				50944825197DD6C2009047CF /* Resources */,
+				509447FE197DD503009047CF /* Main.storyboard */,
+				50944804197DD503009047CF /* Images.xcassets */,
+				509447F3197DD503009047CF /* Supporting Files */,
+			);
+			path = Kamisado;
+			sourceTree = "<group>";
+		};
+		509447F3197DD503009047CF /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				509447F4197DD503009047CF /* Kamisado-Info.plist */,
+				509447F5197DD503009047CF /* InfoPlist.strings */,
+				509447F8197DD503009047CF /* main.m */,
+				509447FA197DD503009047CF /* Kamisado-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		50944811197DD503009047CF /* KamisadoTests */ = {
+			isa = PBXGroup;
+			children = (
+				50944817197DD503009047CF /* KamisadoTests.m */,
+				50944812197DD503009047CF /* Supporting Files */,
+			);
+			path = KamisadoTests;
+			sourceTree = "<group>";
+		};
+		50944812197DD503009047CF /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				50944813197DD503009047CF /* KamisadoTests-Info.plist */,
+				50944814197DD503009047CF /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		50944821197DD6C2009047CF /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				50944822197DD6C2009047CF /* ViewControllers */,
+				5094482C197DD701009047CF /* Views */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		50944822197DD6C2009047CF /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				502B6B9D197DEAAD0002A22D /* KMPlayViewController */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		50944825197DD6C2009047CF /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				50944826197DD6C2009047CF /* Images */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		50944826197DD6C2009047CF /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				50944827197DD6C2009047CF /* checker_mask@2x.png */,
+				50944828197DD6C2009047CF /* fields.png */,
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
+		5094482C197DD701009047CF /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				502B6B95197DE1960002A22D /* KMChecker */,
+				502B6B99197DE19F0002A22D /* KMPlayField */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		50C09882197E095100CBE1C2 /* KMAppDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				50C09883197E095100CBE1C2 /* KMAppDelegate.h */,
+				50C09884197E095100CBE1C2 /* KMAppDelegate.m */,
+			);
+			path = KMAppDelegate;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		509447E8197DD503009047CF /* Kamisado */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5094481B197DD503009047CF /* Build configuration list for PBXNativeTarget "Kamisado" */;
+			buildPhases = (
+				509447E5197DD503009047CF /* Sources */,
+				509447E6197DD503009047CF /* Frameworks */,
+				509447E7197DD503009047CF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Kamisado;
+			productName = Kamisado;
+			productReference = 509447E9197DD503009047CF /* Kamisado.app */;
+			productType = "com.apple.product-type.application";
+		};
+		50944809197DD503009047CF /* KamisadoTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5094481E197DD503009047CF /* Build configuration list for PBXNativeTarget "KamisadoTests" */;
+			buildPhases = (
+				50944806197DD503009047CF /* Sources */,
+				50944807197DD503009047CF /* Frameworks */,
+				50944808197DD503009047CF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				50944810197DD503009047CF /* PBXTargetDependency */,
+			);
+			name = KamisadoTests;
+			productName = KamisadoTests;
+			productReference = 5094480A197DD503009047CF /* KamisadoTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		509447E1197DD503009047CF /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = KM;
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = Noname;
+				TargetAttributes = {
+					50944809197DD503009047CF = {
+						TestTargetID = 509447E8197DD503009047CF;
+					};
+				};
+			};
+			buildConfigurationList = 509447E4197DD503009047CF /* Build configuration list for PBXProject "Kamisado" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 509447E0197DD503009047CF;
+			productRefGroup = 509447EA197DD503009047CF /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				509447E8197DD503009047CF /* Kamisado */,
+				50944809197DD503009047CF /* KamisadoTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		509447E7197DD503009047CF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5094482A197DD6C2009047CF /* checker_mask@2x.png in Resources */,
+				50944805197DD503009047CF /* Images.xcassets in Resources */,
+				5094482B197DD6C2009047CF /* fields.png in Resources */,
+				509447F7197DD503009047CF /* InfoPlist.strings in Resources */,
+				50944800197DD503009047CF /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		50944808197DD503009047CF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				50944816197DD503009047CF /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		509447E5197DD503009047CF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				502B6BA0197DEAAD0002A22D /* KMPlayViewController.m in Sources */,
+				509447F9197DD503009047CF /* main.m in Sources */,
+				502B6B98197DE1960002A22D /* KMChecker.m in Sources */,
+				502B6B9C197DE1B50002A22D /* KMPlayField.m in Sources */,
+				50C09885197E095100CBE1C2 /* KMAppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		50944806197DD503009047CF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				50944818197DD503009047CF /* KamisadoTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		50944810197DD503009047CF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 509447E8197DD503009047CF /* Kamisado */;
+			targetProxy = 5094480F197DD503009047CF /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		509447F5197DD503009047CF /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				509447F6197DD503009047CF /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		509447FE197DD503009047CF /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				509447FF197DD503009047CF /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		50944814197DD503009047CF /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				50944815197DD503009047CF /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		50944819197DD503009047CF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		5094481A197DD503009047CF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		5094481C197DD503009047CF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Inplay Ltd (G5YWB8SD47)";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Kamisado/Kamisado-Prefix.pch";
+				INFOPLIST_FILE = "Kamisado/Kamisado-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "E85AF18F-8B54-4A95-B126-8D3C2E92D00F";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		5094481D197DD503009047CF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Inplay Ltd (G5YWB8SD47)";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Kamisado/Kamisado-Prefix.pch";
+				INFOPLIST_FILE = "Kamisado/Kamisado-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "E85AF18F-8B54-4A95-B126-8D3C2E92D00F";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		5094481F197DD503009047CF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Kamisado.app/Kamisado";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Kamisado/Kamisado-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "KamisadoTests/KamisadoTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		50944820197DD503009047CF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Kamisado.app/Kamisado";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Kamisado/Kamisado-Prefix.pch";
+				INFOPLIST_FILE = "KamisadoTests/KamisadoTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		509447E4197DD503009047CF /* Build configuration list for PBXProject "Kamisado" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				50944819197DD503009047CF /* Debug */,
+				5094481A197DD503009047CF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5094481B197DD503009047CF /* Build configuration list for PBXNativeTarget "Kamisado" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5094481C197DD503009047CF /* Debug */,
+				5094481D197DD503009047CF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5094481E197DD503009047CF /* Build configuration list for PBXNativeTarget "KamisadoTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5094481F197DD503009047CF /* Debug */,
+				50944820197DD503009047CF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 509447E1197DD503009047CF /* Project object */;
+}
