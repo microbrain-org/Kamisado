@@ -18,9 +18,9 @@
 - (void)setPlayField:(KMPlayField *)playField;
 
 - (CGPoint)convertCoordinatesIntoCellPosition:(CGPoint)coordinates;
-- (CheckerColor)getColorAtPosition:(CGPoint)position;
+- (CheckerColor)getCellColorAtPosition:(CGPoint)position;
 - (CGPoint)getCellCenterAtPostion:(CGPoint)position;
 
-- (BOOL)isMoveAllowed;
+- (BOOL)isMoveAllowedFromPosition:(CGPoint)oldPosition toPosition:(CGPoint)newPosition;
 
 @end

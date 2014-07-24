@@ -40,7 +40,7 @@ static KMMovementManager *instance = nil;
     return CGPointMake( x, y);
 }
 
-- (CheckerColor)getColorAtPosition:(CGPoint)position
+- (CheckerColor)getCellColorAtPosition:(CGPoint)position
 {
     return (CheckerColor)[FIELD_COLOR_MAP[(int)position.x][(int)position.y] integerValue];
 }
@@ -50,9 +50,16 @@ static KMMovementManager *instance = nil;
     return CGPointMake(position.x * CELL_SIZE.width + CELL_SIZE.width / 2, position.y * CELL_SIZE.height + CELL_SIZE.height / 2);
 }
 
-- (BOOL)isMoveAllowed
+- (BOOL)isMoveAllowedFromPosition:(CGPoint)oldPosition toPosition:(CGPoint)newPosition
 {
-    return YES;
+    if(abs(oldPosition.x - newPosition.x) == abs(oldPosition.y - newPosition.y) &&
+       (newPosition.x > oldPosition.x || newPosition.y > oldPosition.y))
+        return YES;
+    
+    if(newPosition.y > oldPosition.y && newPosition.x == oldPosition.x)
+        return YES;
+    
+    return NO;
 }
 
 @end

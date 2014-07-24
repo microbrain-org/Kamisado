@@ -29,7 +29,7 @@
         self.color = color;
         self.type = type;
         self.position = position;
-    
+        
         [self setup];
     }
     
@@ -44,18 +44,19 @@
     _active = active;
     
     self.userInteractionEnabled = _active;
-    //[self showGlowAnimation:_active];
+    [self showGlowAnimation:_active];
 }
 
 #pragma mark - Private Methods
 
 - (void)showGlowAnimation:(BOOL)show
 {
+    self.backroundLayer.backgroundColor = show ? [UIColor whiteColor].CGColor : [UIColor clearColor].CGColor;
     self.backroundLayer.shadowOpacity = show ? 1.0 : 0.0;
     self.backroundLayer.shadowColor = show ? [UIColor whiteColor].CGColor : [UIColor clearColor].CGColor;
     self.backroundLayer.shadowRadius = show ? 10.0 : 0.0;
     self.backroundLayer.shadowOffset = CGSizeZero;
-    self.backroundLayer.backgroundColor = show ? [UIColor whiteColor].CGColor : [UIColor clearColor].CGColor;
+    self.imageLayer.shadowPath = [UIBezierPath bezierPathWithOvalInRect:self.bounds].CGPath;
     
     if(show)
     {
@@ -82,6 +83,7 @@
     
     self.backroundLayer = [CALayer layer];
     self.backroundLayer.frame = self.layer.bounds;
+    self.backroundLayer.masksToBounds = NO;
     [self.layer insertSublayer:self.backroundLayer atIndex:0];
     
 }
@@ -93,12 +95,14 @@
     self.imageLayer.contents = (id)[self prepareForegroundImage].CGImage;
     self.imageLayer.backgroundColor = (self.type == CheckerBlack) ? [UIColor blackColor].CGColor : [UIColor groupTableViewBackgroundColor].CGColor;
     self.imageLayer.cornerRadius = 18.0;
+    self.imageLayer.masksToBounds = NO;
     
     self.imageLayer.shadowColor = [UIColor blackColor].CGColor;
-    self.imageLayer.shadowRadius = 4.0;
-    self.imageLayer.shadowOpacity = 0.9;
-    self.imageLayer.shadowOffset = CGSizeZero;
+    self.imageLayer.shadowRadius = 3.0;
+    self.imageLayer.shadowOpacity = 1.5;
     self.imageLayer.masksToBounds = NO;
+    self.imageLayer.shadowOffset = CGSizeZero;
+    self.imageLayer.shadowPath = [UIBezierPath bezierPathWithOvalInRect:self.bounds].CGPath;
     
     [self.layer insertSublayer:self.imageLayer atIndex:1];
 }

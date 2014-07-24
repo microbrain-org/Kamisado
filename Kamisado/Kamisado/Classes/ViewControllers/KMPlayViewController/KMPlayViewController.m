@@ -63,10 +63,10 @@
     self.blackCheckers = [array copy];
     array = nil;
     
-    [self placeCheckersOnTheField];
+    [self addCheckers];
 }
 
-- (void)placeCheckersOnTheField
+- (void)addCheckers
 {
     for(KMChecker *checker in self.whiteCheckers)
         [self.playField addSubview:checker];
@@ -86,7 +86,7 @@
     self.blackCheckers = nil;
     self.whiteCheckers = nil;
     
-    [self placeCheckersOnTheField];
+    [self prepareCheckers];
 }
 
 #pragma mark - Private Methods
@@ -148,31 +148,34 @@
 
 #pragma mark - KMCheckerDelegate
 
-- (void)moveFinished:(KMChecker *)checker atPoint:(CGPoint)point
+- (void)moveFinished:(KMChecker *)aChecker atPoint:(CGPoint)point
 {
     if(!self.isFirstMoveDone)
     {
         self.isFirstMoveDone = YES;
         for(KMChecker *checker in self.blackCheckers)
-            checker.active = NO;
+            if(checker != aChecker)
+                checker.active = NO;
     }
     
     KMMovementManager *manager = [KMMovementManager instance];
+    CGPoint newPosition = [manager convertCoordinatesIntoCellPosition:point];
     
-    if(![manager isMoveAllowed])
+    //put cheсker back if move is not allowed or new position and old position are same
+    if(![manager isMoveAllowedFromPosition:aChecker.position toPosition:newPosition])
     {
-        [self placeChecker:checker atPoint:[manager getCellCenterAtPostion:checker.position] animated:YES];
+        [self placeChecker:aChecker atPoint:[manager getCellCenterAtPostion:aChecker.position] animated:YES];
+        return;
     }
-        
-    checker.active = NO;
-    checker.position = [manager convertCoordinatesIntoCellPosition:point];
-    [self placeChecker:checker atPoint:[manager getCellCenterAtPostion:checker.position] animated:YES];
     
-    if([self isEndOfTheGameWithChecker:checker])
+    aChecker.active = NO;
+    aChecker.position = newPosition;
+    [self placeChecker:aChecker atPoint:[manager getCellCenterAtPostion:aChecker.position] animated:YES];
+    if([self isEndOfTheGameWithChecker:aChecker])
         return;
     
-    CheckerColor color = [[KMMovementManager instance] getColorAtPosition:checker.position];
-    [self findNextActiveCheckerWithColor:color andType:checker.type];
+    CheckerColor color = [[KMMovementManager instance] getCellColorAtPosition:aChecker.position];
+    [self findNextActiveCheckerWithColor:color andType:aChecker.type];
 }
 
 #pragma mark - Gesture Recognizer
@@ -197,23 +200,7 @@
     }
     else if (recognizer.state == UIGestureRecognizerStateEnded)
     {
-        CGPoint velocity = [recognizer velocityInView:checker];
-        CGFloat magnitude = sqrtf((velocity.x * velocity.x) + (velocity.y * velocity.y));
-        CGFloat slideMult = magnitude / 200;
-        
-        float slideFactor = 0.1 * slideMult;
-        
-        CGFloat finalX = checker.center.x;
-        CGFloat finalY = checker.center.y;
-        [UIView animateWithDuration: slideFactor
-                              delay: 0
-                            options: UIViewAnimationOptionCurveEaseOut
-                         animations:^{
-                             CGPoint finalPoint = CGPointMake(finalX, finalY);
-                             recognizer.view.center = finalPoint; }
-                         completion:nil];
-        
-        [self moveFinished:checker atPoint:CGPointMake(finalX, finalY)];
+        [self moveFinished:checker atPoint:checker.center];
     }
     
     [recognizer setTranslation:CGPointMake(0, 0) inView:checker.superview];
