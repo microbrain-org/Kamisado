@@ -10,11 +10,14 @@
 #import "Definitions.h"
 #import "KMChecker.h"
 #import "KMPlayField.h"
+#import "KMMovementManager.h"
 
-@interface KMPlayViewController () <KMCheckerDelegate>
+@interface KMPlayViewController () <UIAlertViewDelegate>
 
 @property (nonatomic, strong) NSArray *whiteCheckers;
 @property (nonatomic, strong) NSArray *blackCheckers;
+
+@property (nonatomic, assign) BOOL isFirstMoveDone;
 
 @property (nonatomic, weak) IBOutlet KMPlayField *playField;
 
@@ -39,9 +42,8 @@
     {
         CheckerColor color = (CheckerColor)[colors[i] integerValue];
         KMChecker *checker = [[KMChecker alloc] initWithColor:color
-                                                         type:kWhite
-                                                     position:CGPointMake(i, 0)
-                                                     delegate:self];
+                                                         type:CheckerWhite
+                                                     position:CGPointMake(i, 0)];
         [self addGestureRecognizerToView:checker];
         [array addObject:checker];
     }
@@ -52,9 +54,8 @@
     {
         CheckerColor color = (CheckerColor)[colors[7 - i] integerValue];
         KMChecker *checker = [[KMChecker alloc] initWithColor:color
-                                                         type:kBlack
-                                                     position:CGPointMake(i, 7)
-                                                     delegate:self];
+                                                         type:CheckerBlack
+                                                     position:CGPointMake(i, 7)];
         checker.active = YES;
         [self addGestureRecognizerToView:checker];
         [array addObject:checker];
@@ -74,30 +75,104 @@
         [self.playField addSubview:checker];
 }
 
+- (void)resetCheckersPosition
+{
+    for(KMChecker *checker in self.blackCheckers)
+        [checker removeFromSuperview];
+    
+    for(KMChecker *checker in self.whiteCheckers)
+        [checker removeFromSuperview];
+    
+    self.blackCheckers = nil;
+    self.whiteCheckers = nil;
+    
+    [self placeCheckersOnTheField];
+}
+
 #pragma mark - Private Methods
 
 - (void)findNextActiveCheckerWithColor:(CheckerColor)color andType:(CheckerType)type
 {
-    KMChecker *checker = nil;
-    NSArray *filteredArray = nil;
+    NSArray *checkersArray = (type == CheckerBlack) ? self.whiteCheckers : self.blackCheckers;
     
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"color == %i", color];
-    if(type == kBlack)
-        filteredArray = [self.blackCheckers filteredArrayUsingPredicate:predicate];
-    else
-        filteredArray = [self.whiteCheckers filteredArrayUsingPredicate:predicate];
+    for(KMChecker *checker in checkersArray)
+    {
+        if(checker.color == color)
+        {
+            checker.active = YES;
+            break;
+        }
+    }
+}
+
+- (void)placeChecker:(KMChecker *)checker atPoint:(CGPoint)point animated:(BOOL)animated
+{
+    if(animated)
+        [UIView beginAnimations:@"placeAnimation" context:nil];
     
-    if(filteredArray && filteredArray.count > 0)
-        checker = [filteredArray firstObject];
+    checker.center = point;
     
-    checker.active = YES;
+    if(animated)
+        [UIView commitAnimations];
+    
+}
+
+- (BOOL)isEndOfTheGameWithChecker:(KMChecker *)checker
+{
+    if(checker.type == CheckerBlack && checker.position.y == 0)
+    {
+        [self endGame];
+        return YES;
+    }
+    
+    if(checker.type == CheckerWhite && checker.position.y == 7)
+    {
+        
+        [self endGame];
+        return YES;
+    }
+    
+    return NO;
+}
+
+- (void)endGame
+{
+    [self showAlertWithMessage:@"Game Ended"];
+}
+
+- (void)showAlertWithMessage:(NSString *)message
+{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:message delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [alert show];
 }
 
 #pragma mark - KMCheckerDelegate
 
-- (void)moveFinished:(KMChecker *)checker
+- (void)moveFinished:(KMChecker *)checker atPoint:(CGPoint)point
 {
-    [self findNextActiveCheckerWithColor:checker.color andType:checker.type];
+    if(!self.isFirstMoveDone)
+    {
+        self.isFirstMoveDone = YES;
+        for(KMChecker *checker in self.blackCheckers)
+            checker.active = NO;
+    }
+    
+    KMMovementManager *manager = [KMMovementManager instance];
+    
+    if(![manager isMoveAllowed])
+    {
+        [self placeChecker:checker atPoint:[manager getCellCenterAtPostion:checker.position] animated:YES];
+    }
+        
+    checker.active = NO;
+    checker.position = [manager convertCoordinatesIntoCellPosition:point];
+    [self placeChecker:checker atPoint:[manager getCellCenterAtPostion:checker.position] animated:YES];
+    
+    if([self isEndOfTheGameWithChecker:checker])
+        return;
+    
+    CheckerColor color = [[KMMovementManager instance] getColorAtPosition:checker.position];
+    [self findNextActiveCheckerWithColor:color andType:checker.type];
 }
 
 #pragma mark - Gesture Recognizer
@@ -118,7 +193,6 @@
     
     if(recognizer.state == UIGestureRecognizerStateBegan)
     {
-        //if(self.active) [self showGlowAnimation:NO];
         [checker.superview bringSubviewToFront:checker];
     }
     else if (recognizer.state == UIGestureRecognizerStateEnded)
@@ -139,11 +213,15 @@
                              recognizer.view.center = finalPoint; }
                          completion:nil];
         
-        //if(self.active) [self showGlowAnimation:YES];
-        [self moveFinished:checker];
+        [self moveFinished:checker atPoint:CGPointMake(finalX, finalY)];
     }
     
     [recognizer setTranslation:CGPointMake(0, 0) inView:checker.superview];
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    [self resetCheckersPosition];
 }
 
 @end

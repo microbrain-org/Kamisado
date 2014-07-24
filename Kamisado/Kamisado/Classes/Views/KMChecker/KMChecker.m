@@ -10,10 +10,8 @@
 #import "Definitions.h"
 
 @interface KMChecker ()
-@property (nonatomic, assign) CheckerColor color;
-@property (nonatomic, assign) CheckerType type;
-@property (nonatomic, assign) CGPoint position;
-@property (nonatomic, strong) id <KMCheckerDelegate> delegate;
+@property (nonatomic, readwrite) CheckerColor color;
+@property (nonatomic, readwrite) CheckerType type;
 
 @property (nonatomic, strong) UIView *bacgroundView;
 @property (nonatomic, strong) CALayer *backroundLayer;
@@ -22,7 +20,7 @@
 
 @implementation KMChecker
 
-- (instancetype)initWithColor:(CheckerColor)color type:(CheckerType)type position:(CGPoint)position delegate:(id<KMCheckerDelegate>)delegate
+- (instancetype)initWithColor:(CheckerColor)color type:(CheckerType)type position:(CGPoint)position
 {
     self = [super init];
     
@@ -31,14 +29,8 @@
         self.color = color;
         self.type = type;
         self.position = position;
-        self.delegate = delegate;
     
         [self setup];
-        
-        self.userInteractionEnabled = YES;
-        
-        //UIPanGestureRecognizer *panRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
-        //[self addGestureRecognizer:panRecognizer];
     }
     
     return self;
@@ -53,44 +45,6 @@
     
     self.userInteractionEnabled = _active;
     //[self showGlowAnimation:_active];
-}
-
-#pragma mark - UIGestureRecognizer
-
-- (void)handlePan:(UIPanGestureRecognizer *)recognizer {
-    CGPoint translation = [recognizer translationInView:self.superview];
-    recognizer.view.center = CGPointMake(recognizer.view.center.x + translation.x,
-                                         recognizer.view.center.y + translation.y);
-    
-    if(recognizer.state == UIGestureRecognizerStateBegan)
-    {
-        if(self.active) [self showGlowAnimation:NO];
-        [self.superview bringSubviewToFront:self];
-    }
-    else if (recognizer.state == UIGestureRecognizerStateEnded)
-    {
-        CGPoint velocity = [recognizer velocityInView:self];
-        CGFloat magnitude = sqrtf((velocity.x * velocity.x) + (velocity.y * velocity.y));
-        CGFloat slideMult = magnitude / 200;
-        
-        float slideFactor = 0.1 * slideMult;
-        
-        CGFloat finalX = self.center.x;
-        CGFloat finalY = self.center.y;
-        [UIView animateWithDuration: slideFactor
-                              delay: 0
-                            options: UIViewAnimationOptionCurveEaseOut
-                         animations:^{
-                             CGPoint finalPoint = CGPointMake(finalX, finalY);
-                             recognizer.view.center = finalPoint; }
-                         completion:nil];
-        
-        if(self.active) [self showGlowAnimation:YES];
-        if(self.delegate && [self.delegate respondsToSelector:@selector(moveFinished:)])
-            [self.delegate moveFinished:self];
-    }
-    
-    [recognizer setTranslation:CGPointMake(0, 0) inView:self.superview];
 }
 
 #pragma mark - Private Methods
@@ -137,7 +91,7 @@
     self.imageLayer = [CALayer layer];
     self.imageLayer.frame = self.layer.bounds;
     self.imageLayer.contents = (id)[self prepareForegroundImage].CGImage;
-    self.imageLayer.backgroundColor = (self.type == kBlack) ? [UIColor blackColor].CGColor : [UIColor groupTableViewBackgroundColor].CGColor;
+    self.imageLayer.backgroundColor = (self.type == CheckerBlack) ? [UIColor blackColor].CGColor : [UIColor groupTableViewBackgroundColor].CGColor;
     self.imageLayer.cornerRadius = 18.0;
     
     self.imageLayer.shadowColor = [UIColor blackColor].CGColor;

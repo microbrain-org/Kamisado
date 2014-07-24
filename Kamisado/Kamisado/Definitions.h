@@ -18,15 +18,31 @@
                                @[@(0),@(0),@(0),@(0),@(0),@(0),@(0),@(0)],\
                                @[@(1),@(1),@(1),@(1),@(1),@(1),@(1),@(1)]]
 
-#define FIELD_COLOR_MAP @[@[@(kOrange),@(kBlue),@(kCyan),@(kMagenta),@(kYellow),@(kRed),@(kGreen),@(kBrown)],\
-                          @[@(kRed),@(kOrange),@(kMagenta),@(kGreen),@(kBlue),@(kYellow),@(kBrown),@(kCyan)],\
-                          @[@(kGreen),@(kMagenta),@(kOrange),@(kRed),@(kCyan),@(kBrown),@(kYellow),@(kBlue)],\
-                          @[@(kMagenta),@(kCyan),@(kBlue),@(kOrange),@(kBrown),@(kGreen),@(kRed),@(kYellow)],\
-                          @[@(kYellow),@(kRed),@(kGreen),@(kBrown),@(kOrange),@(kBlue),@(kCyan),@(kMagenta)],\
-                          @[@(kBlue),@(kYellow),@(kBrown),@(kCyan),@(kRed),@(kOrange),@(kMagenta),@(kGreen)],\
-                          @[@(kCyan),@(kBrown),@(kYellow),@(kBlue),@(kGreen),@(kMagenta),@(kOrange),@(kRed)],\
-                          @[@(kBrown),@(kGreen),@(kRed),@(kYellow),@(kMagenta),@(kCyan),@(kBlue),@(kOrange)]]
+#define FIELD_COLOR_MAP @[@[@(kOrange),@(kRed),@(kGreen),@(kMagenta),@(kYellow),@(kBlue),@(kCyan),@(kBrown)],\
+                          @[@(kBlue),@(kOrange),@(kMagenta),@(kCyan),@(kRed),@(kYellow),@(kBrown),@(kGreen)],\
+                          @[@(kCyan),@(kMagenta),@(kOrange),@(kBlue),@(kGreen),@(kBrown),@(kYellow),@(kRed)],\
+                          @[@(kMagenta),@(kGreen),@(kRed),@(kOrange),@(kBrown),@(kCyan),@(kBlue),@(kYellow)],\
+                          @[@(kYellow),@(kBlue),@(kCyan),@(kBrown),@(kOrange),@(kRed),@(kGreen),@(kMagenta)],\
+                          @[@(kRed),@(kYellow),@(kBrown),@(kGreen),@(kBlue),@(kOrange),@(kMagenta),@(kCyan)],\
+                          @[@(kGreen),@(kBrown),@(kYellow),@(kRed),@(kCyan),@(kMagenta),@(kOrange),@(kBlue)],\
+                          @[@(kBrown),@(kCyan),@(kBlue),@(kYellow),@(kMagenta),@(kGreen),@(kRed),@(kOrange)]]
 
 #define CELL_SIZE CGSizeMake(40.0, 40.0)
+
+typedef enum : NSUInteger {
+    kBrown = 0,
+    kCyan,
+    kBlue,
+    kYellow,
+    kMagenta,
+    kGreen,
+    kRed,
+    kOrange
+} CheckerColor;
+
+typedef enum : NSUInteger {
+    CheckerBlack,
+    CheckerWhite
+} CheckerType;
 
 #endif

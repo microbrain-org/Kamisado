@@ -7,12 +7,20 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Definitions.h"
 
 @class KMPlayField;
 
 @interface KMMovementManager : NSObject
 
 + (KMMovementManager *)instance;
+
 - (void)setPlayField:(KMPlayField *)playField;
+
+- (CGPoint)convertCoordinatesIntoCellPosition:(CGPoint)coordinates;
+- (CheckerColor)getColorAtPosition:(CGPoint)position;
+- (CGPoint)getCellCenterAtPostion:(CGPoint)position;
+
+- (BOOL)isMoveAllowed;
 
 @end
