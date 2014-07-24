@@ -105,12 +105,16 @@
     }
 }
 
-- (void)placeChecker:(KMChecker *)checker atPoint:(CGPoint)point animated:(BOOL)animated
+- (void)placeChecker:(KMChecker *)checker inCellAtPosition:(CGPoint)position animated:(BOOL)animated
 {
+    KMMovementManager *manager = [KMMovementManager instance];
+    [manager emptyCellAtPosition:checker.position];
+    [manager occupyCellAtPosition:position];
+    
     if(animated)
         [UIView beginAnimations:@"placeAnimation" context:nil];
     
-    checker.center = point;
+    checker.center = [manager getCellCenterAtPostion:position];
     
     if(animated)
         [UIView commitAnimations];
@@ -150,6 +154,17 @@
 
 - (void)moveFinished:(KMChecker *)aChecker atPoint:(CGPoint)point
 {
+    KMMovementManager *manager = [KMMovementManager instance];
+    CGPoint newPosition = [manager convertCoordinatesIntoCellPosition:point];
+    
+    //put cheсker back if move is not allowed or new position and old position are same or out of playfield
+    if(!CGRectContainsPoint(self.playField.bounds, point) ||
+       ![manager isMoveAllowedFromPosition:aChecker.position toPosition:newPosition withCheckerType:aChecker.type])
+    {
+        [self placeChecker:aChecker inCellAtPosition:aChecker.position animated:YES];
+        return;
+    }
+    
     if(!self.isFirstMoveDone)
     {
         self.isFirstMoveDone = YES;
@@ -158,19 +173,9 @@
                 checker.active = NO;
     }
     
-    KMMovementManager *manager = [KMMovementManager instance];
-    CGPoint newPosition = [manager convertCoordinatesIntoCellPosition:point];
-    
-    //put cheсker back if move is not allowed or new position and old position are same
-    if(![manager isMoveAllowedFromPosition:aChecker.position toPosition:newPosition])
-    {
-        [self placeChecker:aChecker atPoint:[manager getCellCenterAtPostion:aChecker.position] animated:YES];
-        return;
-    }
-    
     aChecker.active = NO;
+    [self placeChecker:aChecker inCellAtPosition:newPosition animated:YES];
     aChecker.position = newPosition;
-    [self placeChecker:aChecker atPoint:[manager getCellCenterAtPostion:aChecker.position] animated:YES];
     if([self isEndOfTheGameWithChecker:aChecker])
         return;
     

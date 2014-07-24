@@ -11,7 +11,7 @@
 #import "KMMovementManager.h"
 
 @interface KMPlayField ()
-@property (nonatomic, strong) NSArray *playField;
+@property (nonatomic, strong) NSArray *playFieldMap;
 @end
 
 @implementation KMPlayField
@@ -21,14 +21,13 @@
     self = [super initWithCoder:aDecoder];
     
     [self prepare];
-    [[KMMovementManager instance] setPlayField:self];
     
     return self;
 }
 
 - (void)prepare
 {
-    self.playField = [NSMutableArray arrayWithArray:DEFAULT_POSITION_MAP];
+    self.playFieldMap = [NSMutableArray arrayWithArray:DEFAULT_POSITION_MAP];
 }
 
 
