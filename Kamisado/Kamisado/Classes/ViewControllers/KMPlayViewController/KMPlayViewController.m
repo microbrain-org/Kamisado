@@ -56,6 +56,7 @@
     array = nil;
     
     [self placeCheckersOnTheField];
+    [self addPanRecognizersToCheckers];
 }
 
 - (void)placeCheckersOnTheField
@@ -66,6 +67,42 @@
     for (KMChecker *checker in self.blackCheckers)
         [self.playField addSubview:checker];
 }
+
+- (void)addPanRecognizersToCheckers
+{
+    for(KMChecker *checker in self.whiteCheckers){
+        [self addGestureRecognizerToView:checker];
+        [checker setUserInteractionEnabled:YES];
+    }
+    for(KMChecker *checker in self.blackCheckers){
+        [self addGestureRecognizerToView:checker];
+        [checker setUserInteractionEnabled:YES];
+    }
+}
+
+
+- (void)addGestureRecognizerToView:(UIView *)view
+{
+    UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(onPanGesture:)];
+    [panGesture setMaximumNumberOfTouches:2];
+    
+    [view addGestureRecognizer:panGesture];
+}
+
+- (void)onPanGesture:(UIPanGestureRecognizer *)gestureRecognizer
+{
+    UIView *view = [gestureRecognizer view];
+    
+    
+    if ([gestureRecognizer state] == UIGestureRecognizerStateBegan || [gestureRecognizer state] == UIGestureRecognizerStateChanged) {
+        CGPoint translation = [gestureRecognizer translationInView:[view superview]];
+        
+        [view setCenter:CGPointMake([view center].x + translation.x, [view center].y + translation.y)];
+        [gestureRecognizer setTranslation:CGPointZero inView:[view superview]];
+    }
+}
+
+
 
 
 @end
