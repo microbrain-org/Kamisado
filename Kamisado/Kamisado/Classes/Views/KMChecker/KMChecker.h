@@ -24,8 +24,18 @@ typedef enum : NSUInteger {
     kWhite
 } CheckerType;
 
+@class KMChecker;
+
+@protocol KMCheckerDelegate <NSObject>
+- (void)moveFinished:(KMChecker *)checker;
+@end
+
 @interface KMChecker : UIImageView
 
-- (instancetype)initWithColor:(CheckerColor)color type:(CheckerType)type position:(CGPoint)position;
+@property (nonatomic, assign) BOOL active;
+@property (nonatomic, readonly) CheckerColor color;
+@property (nonatomic, readonly) CheckerType type;
+
+- (instancetype)initWithColor:(CheckerColor)color type:(CheckerType)type position:(CGPoint)position delegate:(id <KMCheckerDelegate>)delegate;
 
 @end

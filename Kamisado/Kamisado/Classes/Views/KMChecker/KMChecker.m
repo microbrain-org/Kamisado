@@ -13,6 +13,7 @@
 @property (nonatomic, assign) CheckerColor color;
 @property (nonatomic, assign) CheckerType type;
 @property (nonatomic, assign) CGPoint position;
+@property (nonatomic, strong) id <KMCheckerDelegate> delegate;
 
 @property (nonatomic, strong) UIView *bacgroundView;
 @property (nonatomic, strong) CALayer *backroundLayer;
@@ -21,7 +22,7 @@
 
 @implementation KMChecker
 
-- (instancetype)initWithColor:(CheckerColor)color type:(CheckerType)type position:(CGPoint)position
+- (instancetype)initWithColor:(CheckerColor)color type:(CheckerType)type position:(CGPoint)position delegate:(id<KMCheckerDelegate>)delegate
 {
     self = [super init];
     
@@ -30,21 +31,94 @@
         self.color = color;
         self.type = type;
         self.position = position;
+        self.delegate = delegate;
     
         [self setup];
+        
+        self.userInteractionEnabled = YES;
+        
+        UIPanGestureRecognizer *panRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
+        [self addGestureRecognizer:panRecognizer];
     }
     
     return self;
 }
 
+
 #pragma mark - Setters
 
-- (void)setHighlighted:(BOOL)highlighted
+- (void)setActive:(BOOL)active
 {
-    self.backroundLayer.backgroundColor = highlighted ? [UIColor greenColor].CGColor : [UIColor clearColor].CGColor;
+    _active = active;
+    
+    self.userInteractionEnabled = _active;
+    [self showGlowAnimation:_active];
+}
+
+#pragma mark - UIGestureRecognizer
+
+- (void)handlePan:(UIPanGestureRecognizer *)recognizer {
+    CGPoint translation = [recognizer translationInView:self.superview];
+    recognizer.view.center = CGPointMake(recognizer.view.center.x + translation.x,
+                                         recognizer.view.center.y + translation.y);
+    
+    if(recognizer.state == UIGestureRecognizerStateBegan)
+    {
+        if(self.active) [self showGlowAnimation:NO];
+        [self.superview bringSubviewToFront:self];
+    }
+    else if (recognizer.state == UIGestureRecognizerStateEnded)
+    {
+        CGPoint velocity = [recognizer velocityInView:self];
+        CGFloat magnitude = sqrtf((velocity.x * velocity.x) + (velocity.y * velocity.y));
+        CGFloat slideMult = magnitude / 200;
+        
+        float slideFactor = 0.1 * slideMult;
+        
+        CGFloat finalX = self.center.x;
+        CGFloat finalY = self.center.y;
+        [UIView animateWithDuration: slideFactor
+                              delay: 0
+                            options: UIViewAnimationOptionCurveEaseOut
+                         animations:^{
+                             CGPoint finalPoint = CGPointMake(finalX, finalY);
+                             recognizer.view.center = finalPoint; }
+                         completion:nil];
+        
+        if(self.active) [self showGlowAnimation:YES];
+        if(self.delegate && [self.delegate respondsToSelector:@selector(moveFinished:)])
+            [self.delegate moveFinished:self];
+    }
+    
+    [recognizer setTranslation:CGPointMake(0, 0) inView:self.superview];
 }
 
 #pragma mark - Private Methods
+
+- (void)showGlowAnimation:(BOOL)show
+{
+    self.backroundLayer.shadowOpacity = show ? 1.0 : 0.0;
+    self.backroundLayer.shadowColor = show ? [UIColor whiteColor].CGColor : [UIColor clearColor].CGColor;
+    self.backroundLayer.shadowRadius = show ? 10.0 : 0.0;
+    self.backroundLayer.shadowOffset = CGSizeZero;
+    self.backroundLayer.backgroundColor = show ? [UIColor whiteColor].CGColor : [UIColor clearColor].CGColor;
+    
+    if(show)
+    {
+        CABasicAnimation* animation = [CABasicAnimation animationWithKeyPath:@"opacity"];
+        animation.fromValue = @(0);
+        animation.toValue = @(0.6);
+        animation.repeatCount = HUGE_VAL;
+        animation.duration = 1.0;
+        animation.autoreverses = YES;
+        animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+        [self.backroundLayer addAnimation:animation forKey:@"pulse"];
+    }
+    else
+        [self.backroundLayer removeAllAnimations];
+}
+
+#pragma mark - Setup View
 
 - (void)setup
 {
@@ -55,6 +129,7 @@
     self.backroundLayer = [CALayer layer];
     self.backroundLayer.frame = self.layer.bounds;
     [self.layer insertSublayer:self.backroundLayer atIndex:0];
+    
 }
 
 - (void)setupImageLayer

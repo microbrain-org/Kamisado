@@ -24,6 +24,7 @@
 		50944818197DD503009047CF /* KamisadoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 50944817197DD503009047CF /* KamisadoTests.m */; };
 		5094482A197DD6C2009047CF /* checker_mask@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 50944827197DD6C2009047CF /* checker_mask@2x.png */; };
 		5094482B197DD6C2009047CF /* fields.png in Resources */ = {isa = PBXBuildFile; fileRef = 50944828197DD6C2009047CF /* fields.png */; };
+		50A94FB9198166DD00810EEF /* KMMovementManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 50A94FB8198166DD00810EEF /* KMMovementManager.m */; };
 		50C09885197E095100CBE1C2 /* KMAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 50C09884197E095100CBE1C2 /* KMAppDelegate.m */; };
 /* End PBXBuildFile section */
 
@@ -62,6 +63,8 @@
 		50944817197DD503009047CF /* KamisadoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KamisadoTests.m; sourceTree = "<group>"; };
 		50944827197DD6C2009047CF /* checker_mask@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "checker_mask@2x.png"; sourceTree = "<group>"; };
 		50944828197DD6C2009047CF /* fields.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fields.png; sourceTree = "<group>"; };
+		50A94FB7198166DD00810EEF /* KMMovementManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KMMovementManager.h; sourceTree = "<group>"; };
+		50A94FB8198166DD00810EEF /* KMMovementManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KMMovementManager.m; sourceTree = "<group>"; };
 		50C09883197E095100CBE1C2 /* KMAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KMAppDelegate.h; sourceTree = "<group>"; };
 		50C09884197E095100CBE1C2 /* KMAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KMAppDelegate.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -193,6 +196,7 @@
 		50944821197DD6C2009047CF /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				50A94FB5198166B700810EEF /* Managers */,
 				50944822197DD6C2009047CF /* ViewControllers */,
 				5094482C197DD701009047CF /* Views */,
 			);
@@ -231,6 +235,23 @@
 				502B6B99197DE19F0002A22D /* KMPlayField */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		50A94FB5198166B700810EEF /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				50A94FB6198166CB00810EEF /* MovementManager */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
+		50A94FB6198166CB00810EEF /* MovementManager */ = {
+			isa = PBXGroup;
+			children = (
+				50A94FB7198166DD00810EEF /* KMMovementManager.h */,
+				50A94FB8198166DD00810EEF /* KMMovementManager.m */,
+			);
+			path = MovementManager;
 			sourceTree = "<group>";
 		};
 		50C09882197E095100CBE1C2 /* KMAppDelegate */ = {
@@ -346,6 +367,7 @@
 				509447F9197DD503009047CF /* main.m in Sources */,
 				502B6B98197DE1960002A22D /* KMChecker.m in Sources */,
 				502B6B9C197DE1B50002A22D /* KMPlayField.m in Sources */,
+				50A94FB9198166DD00810EEF /* KMMovementManager.m in Sources */,
 				50C09885197E095100CBE1C2 /* KMAppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

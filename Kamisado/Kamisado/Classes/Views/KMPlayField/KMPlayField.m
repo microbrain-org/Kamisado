@@ -8,6 +8,7 @@
 
 #import "KMPlayField.h"
 #import "Definitions.h"
+#import "KMMovementManager.h"
 
 @interface KMPlayField ()
 @property (nonatomic, strong) NSArray *playField;
@@ -15,9 +16,14 @@
 
 @implementation KMPlayField
 
-- (void)loadFromNib
+- (id)initWithCoder:(NSCoder *)aDecoder
 {
+    self = [super initWithCoder:aDecoder];
+    
     [self prepare];
+    [[KMMovementManager instance] setPlayField:self];
+    
+    return self;
 }
 
 - (void)prepare

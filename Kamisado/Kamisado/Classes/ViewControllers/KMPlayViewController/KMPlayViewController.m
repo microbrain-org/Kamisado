@@ -11,7 +11,7 @@
 #import "KMChecker.h"
 #import "KMPlayField.h"
 
-@interface KMPlayViewController ()
+@interface KMPlayViewController () <KMCheckerDelegate>
 
 @property (nonatomic, strong) NSArray *whiteCheckers;
 @property (nonatomic, strong) NSArray *blackCheckers;
@@ -29,7 +29,7 @@
     [self prepareCheckers];
 }
 
-#pragma mark - Private Methods
+#pragma mark - Setup
 
 - (void)prepareCheckers
 {
@@ -38,9 +38,12 @@
     for(int i = 0; i < 8; i++)
     {
         CheckerColor color = (CheckerColor)[colors[i] integerValue];
-        KMChecker *checker = [[KMChecker alloc] initWithColor:color type:kWhite position:CGPointMake(i, 0)];
+        KMChecker *checker = [[KMChecker alloc] initWithColor:color
+                                                         type:kWhite
+                                                     position:CGPointMake(i, 0)
+                                                     delegate:self];
         if(i == 3)
-            checker.highlighted = YES;
+            checker.active = YES;
         [array addObject:checker];
     }
     self.whiteCheckers = [array copy];
@@ -49,7 +52,10 @@
     for(int i = 0; i < 8; i++)
     {
         CheckerColor color = (CheckerColor)[colors[7 - i] integerValue];
-        KMChecker *checker = [[KMChecker alloc] initWithColor:color type:kBlack position:CGPointMake(i, 7)];
+        KMChecker *checker = [[KMChecker alloc] initWithColor:color
+                                                         type:kBlack
+                                                     position:CGPointMake(i, 7)
+                                                     delegate:self];
         [array addObject:checker];
     }
     self.blackCheckers = [array copy];
@@ -67,5 +73,30 @@
         [self.playField addSubview:checker];
 }
 
+#pragma mark - Private Methods
+
+- (void)findNextActiveCheckerWithColor:(CheckerColor)color andType:(CheckerType)type
+{
+    KMChecker *checker = nil;
+    NSArray *filteredArray = nil;
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"color == %i", color];
+    if(type == kBlack)
+        filteredArray = [self.whiteCheckers filteredArrayUsingPredicate:predicate];
+    else
+        filteredArray = [self.blackCheckers filteredArrayUsingPredicate:predicate];
+    
+    if(filteredArray && filteredArray.count > 0)
+        checker = [filteredArray firstObject];
+    
+    checker.active = YES;
+}
+
+#pragma mark - KMCheckerDelegate
+
+- (void)moveFinished:(KMChecker *)checker
+{
+    [self findNextActiveCheckerWithColor:checker.color andType:checker.type];
+}
 
 @end
