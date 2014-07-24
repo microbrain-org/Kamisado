@@ -37,8 +37,8 @@
         
         self.userInteractionEnabled = YES;
         
-        UIPanGestureRecognizer *panRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
-        [self addGestureRecognizer:panRecognizer];
+        //UIPanGestureRecognizer *panRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
+        //[self addGestureRecognizer:panRecognizer];
     }
     
     return self;
@@ -52,7 +52,7 @@
     _active = active;
     
     self.userInteractionEnabled = _active;
-    [self showGlowAnimation:_active];
+    //[self showGlowAnimation:_active];
 }
 
 #pragma mark - UIGestureRecognizer
