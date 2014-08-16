@@ -8,6 +8,7 @@
 
 #import "KMChecker.h"
 #import "Definitions.h"
+#import "UIView+Glow.h"
 
 @interface KMChecker ()
 @property (nonatomic, readwrite) CheckerColor color;
@@ -51,26 +52,12 @@
 
 - (void)showGlowAnimation:(BOOL)show
 {
-    self.backroundLayer.backgroundColor = show ? [UIColor whiteColor].CGColor : [UIColor clearColor].CGColor;
-    self.backroundLayer.shadowOpacity = show ? 1.0 : 0.0;
-    self.backroundLayer.shadowColor = show ? [UIColor whiteColor].CGColor : [UIColor clearColor].CGColor;
-    self.backroundLayer.shadowRadius = show ? 10.0 : 0.0;
-    self.backroundLayer.shadowOffset = CGSizeZero;
-    self.imageLayer.shadowPath = [UIBezierPath bezierPathWithOvalInRect:self.bounds].CGPath;
-    
     if(show)
     {
-        CABasicAnimation* animation = [CABasicAnimation animationWithKeyPath:@"opacity"];
-        animation.fromValue = @(0);
-        animation.toValue = @(0.6);
-        animation.repeatCount = HUGE_VAL;
-        animation.duration = 1.0;
-        animation.autoreverses = YES;
-        animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
-        [self.backroundLayer addAnimation:animation forKey:@"pulse"];
+        [self startGlowing];
     }
     else
-        [self.backroundLayer removeAllAnimations];
+        [self stopGlowing];
 }
 
 #pragma mark - Setup View

@@ -196,8 +196,8 @@
     KMChecker *checker = (KMChecker *)[recognizer view];
 
     CGPoint translation = [recognizer translationInView:checker.superview];
-    recognizer.view.center = CGPointMake(recognizer.view.center.x + translation.x,
-                                         recognizer.view.center.y + translation.y);
+    checker.center = CGPointMake(recognizer.view.center.x + translation.x,
+                                 recognizer.view.center.y + translation.y);
     
     if(recognizer.state == UIGestureRecognizerStateBegan)
     {
